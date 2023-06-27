@@ -12,6 +12,10 @@ import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import { useTheme } from "@mui/material/styles";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import IconButton from "@mui/material/IconButton";
 
 const useStyles = makeStyles({
   root: {
@@ -35,9 +39,10 @@ const useStyles = makeStyles({
   pos: {},
 });
 
-
-function App() {
+// eslint-disable-next-line react/prop-types
+function App({  setMode }) {
   const classes = useStyles();
+  const theme = useTheme();
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,
@@ -48,7 +53,7 @@ function App() {
   };
 
   const bull = <span className={classes.bullet}>•</span>;
-
+  console.log(setMode);
   return (
     <>
       <div className={classes.root}>
@@ -57,6 +62,19 @@ function App() {
             <Typography variant="h6" className={classes.title}>
               My React app
             </Typography>
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={() =>
+                setMode((prev) => (prev == "dark" ? "light" : "dark"))
+              }
+              color="inherit"
+            >
+              {theme.palette.mode === "dark" ? (
+                <Brightness7Icon />
+              ) : (
+                <Brightness4Icon />
+              )}
+            </IconButton>
           </Toolbar>
         </AppBar>
 
